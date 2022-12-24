@@ -9,6 +9,7 @@ import com.example.mytestproject.domain.UseCaseModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class RepositoryImpl(
     private val mapper: Mapper,
@@ -21,9 +22,23 @@ class RepositoryImpl(
 
         val response = api.getCardDetails(body)
 
+       // CoroutineScope(Dispatchers.IO).launch {
+       //     kotlin.runCatching {
+       //         withContext(Dispatchers.IO){
+       //             api.getCardDetails(body)
+       //         }
+
+       //     }.onSuccess {
+       //         // do something with success response
+       //     }.onFailure{
+       //         // do something on failure response
+       //     }
+
+       // }
+
         CoroutineScope(Dispatchers.IO).launch {
 
-            dao.insert(mapper.mapModelToDbModel(response))
+            dao.insert(mapper.mapModelToDbModel(body, response))
 
         }
 

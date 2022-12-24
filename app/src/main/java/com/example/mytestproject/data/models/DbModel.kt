@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName ="card_table")
 data class DbModel (
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val id: Int,
     val city: String,
     val name: String,

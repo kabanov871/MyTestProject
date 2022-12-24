@@ -50,9 +50,9 @@ class Mapper {
         type = model.type
     )
 
-    fun mapModelToDbModel(model: Model) = DbModel(
+    fun mapModelToDbModel(bin: String, model: Model) = DbModel(
 
-        id =0,
+        id = bin.toInt(),
         city = model.bank.city,
         name = model.bank.name,
         phone = model.bank.phone,
