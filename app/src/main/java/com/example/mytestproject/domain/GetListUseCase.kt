@@ -1,6 +1,8 @@
 package com.example.mytestproject.domain
 
-class GetListUseCase (private val repository: Repository) {
+import javax.inject.Inject
+
+class GetListUseCase @Inject constructor (private val repository: Repository) {
 
     fun getList(): List<UseCaseModel> {
         return repository.getList()

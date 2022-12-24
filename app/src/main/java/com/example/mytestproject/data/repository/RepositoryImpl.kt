@@ -10,8 +10,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class RepositoryImpl(
+class RepositoryImpl @Inject constructor (
     private val mapper: Mapper,
     private val dao: CardDao,
     private val api: ApiInterface,

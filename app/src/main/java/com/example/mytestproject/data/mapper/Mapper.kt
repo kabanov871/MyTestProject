@@ -3,8 +3,9 @@ package com.example.mytestproject.data.mapper
 import com.example.mytestproject.data.models.DbModel
 import com.example.mytestproject.data.models.Model
 import com.example.mytestproject.domain.UseCaseModel
+import javax.inject.Inject
 
-class Mapper {
+class Mapper @Inject constructor () {
 
     fun mapModelToUseCaseModel(model: Model) = UseCaseModel(
 

@@ -1,6 +1,8 @@
 package com.example.mytestproject.domain
 
-data class UseCaseModel (
+import javax.inject.Inject
+
+data class UseCaseModel @Inject constructor (
 
     val city: String,
     val name: String,
