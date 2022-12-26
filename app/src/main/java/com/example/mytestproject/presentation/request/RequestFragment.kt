@@ -65,14 +65,16 @@ class RequestFragment : Fragment() {
                  phoneNumber.text = card.phone
 
                  if (card.prepaid == true) {
-                     prepaid.text = R.string.yes.toString()
-                 } else
-                     prepaid.text = R.string.no.toString()
+                     prepaid.setText(R.string.yes)
+                 }
+                 else
+                     prepaid.setText(R.string.no)
 
                  if (card.luhn == true) {
-                     luhn.text = R.string.yes.toString()
-                 } else
-                     luhn.text = R.string.no.toString()
+                     luhn.setText(R.string.yes)
+                 }
+                 else
+                     luhn.setText(R.string.no)
 
                  website.setOnClickListener { openUrl(card.url) }
                  phoneNumber.setOnClickListener { call(card.phone) }

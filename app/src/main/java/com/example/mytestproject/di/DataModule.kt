@@ -20,11 +20,13 @@ interface DataModule {
     companion object {
 
         @Provides
+        @ApplicationScope
         fun provideCardDao(application: Application): CardDao {
             return CardDatabase.getInstance(application).cardDAO
         }
 
         @Provides
+        @ApplicationScope
         fun provideApiInterface():ApiInterface {
             return ApiClient.api
         }

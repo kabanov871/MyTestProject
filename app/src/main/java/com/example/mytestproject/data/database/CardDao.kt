@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.mytestproject.data.models.DbModel
-import com.example.mytestproject.data.models.Model
 
 @Dao
 interface CardDao {
