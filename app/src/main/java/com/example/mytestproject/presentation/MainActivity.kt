@@ -1,15 +1,25 @@
 package com.example.mytestproject.presentation
 
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.mytestproject.R
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mytestproject.databinding.ActivityMainBinding
-import com.example.mytestproject.presentation.history.HistoryFragment
-import com.example.mytestproject.presentation.request.RequestFragment
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding : ActivityMainBinding
+    lateinit var adapter: HistoryAdapter
+    private lateinit var viewModel: MainViewModel
+    lateinit var number: String
+    lateinit var link: String
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private val component by lazy {
         (application as TestApp).component
@@ -21,19 +31,47 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction().replace(R.id.frame, RequestFragment.newInstance()).commit()
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
-        binding.bNav.setOnNavigationItemSelectedListener {
-            when (it.itemId){
-                R.id.item1 ->{
-                    supportFragmentManager.beginTransaction().replace(R.id.frame, RequestFragment.newInstance()).commit()
-                }
-                R.id.item2 ->{
-                    supportFragmentManager.beginTransaction().replace(R.id.frame, HistoryFragment.newInstance()).commit()
-                }
+        initRecycler()
+        displayCards()
 
-            }
-            true
+        binding.button.setOnClickListener {
+
+            val bin = binding.textImput.text.toString()
+            viewModel.saveCard(bin)
+            initRecycler()
+            displayCards()
+
         }
+    }
+
+    private fun initRecycler(){
+        binding.rv.layoutManager = LinearLayoutManager(this@MainActivity)
+        adapter = HistoryAdapter({num: String ->call(num)}, {url: String ->openUrl(url)})
+        binding.rv.adapter = adapter
+
+    }
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun displayCards(){
+
+        viewModel.getList().observe(this
+
+        ) {
+            adapter.setList(it.asReversed())
+            adapter.notifyDataSetChanged()
+        }
+    }
+    fun call(num: String){
+        number = num
+        val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(number)))
+        startActivity(intent)
+    }
+    fun openUrl(url: String){
+        link = url
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://" + Uri.encode(url)))
+        startActivity(intent)
     }
 }

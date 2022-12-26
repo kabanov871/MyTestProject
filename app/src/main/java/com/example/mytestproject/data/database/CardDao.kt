@@ -15,10 +15,4 @@ interface CardDao {
 
     @Query("SELECT * from card_table")
     fun getAllCards(): LiveData<List<DbModel>>
-
-    @Query("SELECT * from card_table WHERE bin = :bin")
-    suspend fun getCard(bin: String): DbModel
-
-
-
 }

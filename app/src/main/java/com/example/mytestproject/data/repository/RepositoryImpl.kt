@@ -39,10 +39,6 @@ class RepositoryImpl @Inject constructor (
             })
     }
 
-    override fun getCard(body: String): UseCaseModel {
-
-        return runBlocking { mapper.mapDbModelToUseCaseModel(dao.getCard(body)) }
-    }
 
     override fun getList(): LiveData<List<UseCaseModel>> = Transformations.map(dao.getAllCards()) {
         mapper.mapListToUseCase(it)

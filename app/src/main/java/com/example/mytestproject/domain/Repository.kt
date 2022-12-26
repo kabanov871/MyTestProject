@@ -8,5 +8,4 @@ interface Repository {
 
     fun getList(): LiveData<List<UseCaseModel>>
 
-    fun getCard(body: String): UseCaseModel
 }

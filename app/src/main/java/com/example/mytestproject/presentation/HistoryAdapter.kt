@@ -1,4 +1,4 @@
-package com.example.mytestproject.presentation.history
+package com.example.mytestproject.presentation
 
 
 import android.view.LayoutInflater
