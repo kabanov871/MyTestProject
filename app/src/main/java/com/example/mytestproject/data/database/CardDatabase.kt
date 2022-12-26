@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.mytestproject.data.models.DbModel
 
-@Database(entities = [DbModel::class], version = 1)
+@Database(entities = [DbModel::class], version = 2)
 abstract class CardDatabase: RoomDatabase() {
 
     abstract val cardDAO: CardDao
@@ -19,7 +19,7 @@ abstract class CardDatabase: RoomDatabase() {
                 var instance = INSTANCE
                 if(instance==null){
                     instance = Room.databaseBuilder(
-                        context.applicationContext, CardDatabase::class.java, "database"
+                        context.applicationContext, CardDatabase::class.java, "database2"
                     ).build()
                 }
                 return instance

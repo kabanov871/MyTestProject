@@ -4,6 +4,8 @@ import javax.inject.Inject
 
 data class UseCaseModel @Inject constructor (
 
+    val id: Int,
+    val bin: String,
     val city: String,
     val name: String,
     val phone: String,

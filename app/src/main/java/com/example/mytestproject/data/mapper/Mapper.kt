@@ -7,31 +7,12 @@ import javax.inject.Inject
 
 class Mapper @Inject constructor () {
 
-    fun mapModelToUseCaseModel(model: Model) = UseCaseModel(
-
-        city = model.bank.city,
-        name = model.bank.name,
-        phone = model.bank.phone,
-        url = model.bank.url,
-        brand = model.brand,
-        alpha2 = model.country.alpha2,
-        currency = model.country.currency,
-        emoji = model.country.emoji,
-        latitude = model.country.latitude,
-        longitude = model.country.longitude,
-        country = model.country.name,
-        numeric = model.country.numeric,
-        length = model.number.length,
-        luhn = model.number.luhn,
-        prepaid = model.prepaid,
-        scheme = model.scheme,
-        type = model.type
-    )
-
     fun mapListToUseCase(list: List<DbModel>) = list.map { mapDbModelToUseCaseModel(it) }
 
     fun mapDbModelToUseCaseModel (model: DbModel) = UseCaseModel(
 
+        id = 0,
+        bin = model.bin,
         city = model.city,
         name = model.name,
         phone = model.phone,
@@ -42,7 +23,7 @@ class Mapper @Inject constructor () {
         emoji = model.emoji,
         latitude = model.latitude,
         longitude = model.longitude,
-        country = model.name,
+        country = model.country,
         numeric = model.numeric,
         length = model.length,
         luhn = model.luhn,
@@ -53,7 +34,8 @@ class Mapper @Inject constructor () {
 
     fun mapModelToDbModel(bin: String, model: Model) = DbModel(
 
-        id = bin.toInt(),
+        id = 0,
+        bin = bin,
         city = model.bank.city,
         name = model.bank.name,
         phone = model.bank.phone,

@@ -24,9 +24,9 @@ interface DataModule {
             return CardDatabase.getInstance(application).cardDAO
         }
 
-       // @Provides
-       // fun provideApiInterface():ApiInterface {
-       //     return ApiClient.apiService
-       // }
+        @Provides
+        fun provideApiInterface():ApiInterface {
+            return ApiClient.api
+        }
     }
 }

@@ -1,8 +1,12 @@
 package com.example.mytestproject.domain
 
+import androidx.lifecycle.LiveData
+
 interface Repository {
 
-    fun getAndSave(body: String): UseCaseModel
+    fun saveCard(body: String)
 
-    fun getList(): List<UseCaseModel>
+    fun getList(): LiveData<List<UseCaseModel>>
+
+    fun getCard(body: String): UseCaseModel
 }
