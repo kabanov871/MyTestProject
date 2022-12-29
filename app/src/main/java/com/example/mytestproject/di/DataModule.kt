@@ -15,6 +15,7 @@ import dagger.Provides
 interface DataModule {
 
     @Binds
+    @ApplicationScope
     fun bindRepository(impl: RepositoryImpl): Repository
 
     companion object {

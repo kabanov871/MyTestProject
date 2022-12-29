@@ -18,8 +18,6 @@ interface ApplicationComponent {
 
     fun inject(activity: MainActivity)
 
-    fun inject(application: TestApp)
-
     @Component.Factory
     interface Factory {
 
