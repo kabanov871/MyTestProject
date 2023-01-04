@@ -5,38 +5,27 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.mytestproject.data.database.CardDao
 import com.example.mytestproject.data.mapper.Mapper
-import com.example.mytestproject.data.models.Model
-import com.example.mytestproject.data.network.ApiClient
+import com.example.mytestproject.data.network.ApiInterface
 import com.example.mytestproject.domain.Repository
 import com.example.mytestproject.domain.UseCaseModel
 import kotlinx.coroutines.*
-import retrofit2.*
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor (
     private val mapper: Mapper,
-    private val dao: CardDao
+    private val dao: CardDao,
+    private val api: ApiInterface
 ): Repository {
 
     override fun saveCard(body: String) {
 
-            val apiInterface = ApiClient.api.getCardDetails(body)
-
-            apiInterface.enqueue(object : Callback<Model> {
-                override fun onResponse(call: Call<Model>, response: Response<Model>) {
-
-                    if (response.body() != null)
-                        CoroutineScope(Dispatchers.IO).launch {
-
-                            dao.insert(mapper.mapModelToDbModel(body, response.body()!!))
-
-                        }
+        CoroutineScope(Dispatchers.IO).launch {
+            api.getCardDetails(body).let {
+                if (it.isSuccessful) {
+                    dao.insert(mapper.mapModelToDbModel(body,it.body()!!))
                 }
-
-                override fun onFailure(call: Call<Model>, t: Throwable) {
-
-                }
-            })
+            }
+        }
     }
 
 
