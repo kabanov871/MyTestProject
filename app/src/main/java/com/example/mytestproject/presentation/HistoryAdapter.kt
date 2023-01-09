@@ -61,8 +61,8 @@ class HistoryAdapter (private val call:(num: String)->Unit, private val openUrl:
                 else
                     luhn.setText(R.string.no)
 
-                website.setOnClickListener { openUrl(card.url) }
-                phoneNumber.setOnClickListener { call(card.phone) }
+                website.setOnClickListener { card.url?.let { it1 -> openUrl(it1) } }
+                phoneNumber.setOnClickListener { card.phone?.let { it1 -> call(it1) } }
             }
 
 

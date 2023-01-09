@@ -13,7 +13,6 @@ class Mapper @Inject constructor () {
 
         id = 0,
         bin = model.bin,
-        city = model.city,
         name = model.name,
         phone = model.phone,
         url = model.url,
@@ -32,26 +31,4 @@ class Mapper @Inject constructor () {
         type = model.type
     )
 
-    fun mapModelToDbModel(bin: String, model: Model) = DbModel(
-
-        id = 0,
-        bin = bin,
-        city = model.bank?.city.toString(),
-        name = model.bank?.name.toString(),
-        phone = model.bank?.phone.toString(),
-        url = model.bank?.url.toString(),
-        brand = model.brand,
-        alpha2 = model.country.alpha2,
-        currency = model.country.currency,
-        emoji = model.country.emoji,
-        latitude = model.country.latitude,
-        longitude = model.country.longitude,
-        country = model.country.name,
-        numeric = model.country.numeric,
-        length = model.number.length,
-        luhn = model.number.luhn,
-        prepaid = model.prepaid,
-        scheme = model.scheme,
-        type = model.type
-    )
 }
